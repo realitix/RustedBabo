@@ -1,7 +1,8 @@
 [package]
-name = "RustedBabo"
+name = "rusted_babo"
 version = "0.1.0"
-authors = ["JS <realitix@gmail.com>"]
+authors = ["Jean-Sebastien BEVILACQUA <realitix@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+glium = "*"

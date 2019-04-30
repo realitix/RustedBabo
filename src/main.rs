@@ -1,3 +1,13 @@
+#[macro_use]
+extern crate glium;
+
+mod gdx;
+mod backends;
+mod app;
+
+
 fn main() {
-    println!("Hello, world!");
+    let config = backends::GliumApplicationConfiguration{};
+    let app = backends::GliumApplication::new(app::BaboApplication::new(), config);
+    app.run()
 }
