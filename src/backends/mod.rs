@@ -8,13 +8,16 @@ pub struct GliumApplicationConfiguration {
 }
 
 pub struct GliumApplication<T: ApplicationListener> {
-    application_listener: T
+    listener: T,
+    config: GliumApplicationConfiguration
 }
 
 impl<T: ApplicationListener> GliumApplication<T> {
     pub fn new(listener: T, config: GliumApplicationConfiguration) -> GliumApplication<T> {
+        listener.create();
         GliumApplication {
-            application_listener: listener
+            listener: listener,
+            config: config
         }
     }
 
@@ -26,9 +29,7 @@ impl<T: ApplicationListener> GliumApplication<T> {
 
         let mut closed = false;
         while !closed {
-            let mut target = display.draw();
-            target.clear_color(0.0, 0., 1., 1.);
-            target.finish().unwrap();
+            self.listener.render(&display);
 
             events_loop.poll_events(|event| {
                 match event {

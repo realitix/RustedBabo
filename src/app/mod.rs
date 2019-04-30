@@ -1,5 +1,7 @@
 use crate::gdx;
 
+use glium::Display;
+use glium::Surface;
 use gdx::app::ApplicationListener;
 
 pub struct BaboApplication {}
@@ -11,27 +13,21 @@ impl BaboApplication {
 }
 
 impl ApplicationListener for BaboApplication {
-    fn create() {
+    fn create(&self) {
 
     }
 
-    fn resize(width: u32, height: u32) {
+    fn resize(&self, width: u32, height: u32) {
 
     }
 
-    fn render() {
-
+    fn render(&self, display: &Display) {
+        let mut target = display.draw();
+        target.clear_color(0.0, 0., 1., 1.);
+        target.finish().unwrap();
     }
 
-    fn pause() {
-
-    }
-
-    fn resume() {
-
-    }
-
-    fn dispose() {
+    fn dispose(&self) {
 
     }
 }
