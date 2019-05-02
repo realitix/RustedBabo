@@ -2,6 +2,8 @@ mod screen;
 
 use crate::gdx;
 
+use std::time::{Duration, SystemTime};
+
 use glium::Display;
 
 use gdx::app::ApplicationListener;
@@ -14,12 +16,14 @@ use screen::GameScreen;
 
 pub struct BaboApplication {
     screen: Box<Screen>,
+    last_frame_time: SystemTime
 }
 
 impl BaboApplication {
     pub fn new() -> BaboApplication {
         let screen = Box::new(GameScreen::new());
-        BaboApplication { screen }
+        let last_frame_time = SystemTime::now();
+        BaboApplication { screen, last_frame_time }
     }
 
     pub fn set_screen(&mut self, context: &AppContext, screen: Box<Screen>) {
@@ -41,7 +45,9 @@ impl ApplicationListener for BaboApplication {
     }
 
     fn render(&self, context: &AppContext) {
-        let delta = 1.;
+        let now = SystemTime::now();
+        let duration = now.duration_since(self.last_frame_time).unwrap();
+        let delta: f32 = duration.as_nanos() as f32 / 1000000000.;
         self.screen.render(context, delta);
     }
 
