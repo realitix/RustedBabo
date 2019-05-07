@@ -1,8 +1,8 @@
 [package]
-name = "rusted_babo"
+name = "RustedBabo2"
 version = "0.1.0"
-authors = ["Jean-Sebastien BEVILACQUA <realitix@gmail.com>"]
+authors = []
 edition = "2018"
 
 [dependencies]
-glium = "*"
+amethyst = "0.10.0"
